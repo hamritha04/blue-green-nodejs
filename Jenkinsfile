@@ -67,12 +67,18 @@ pipeline {
 
         stage('Switch Traffic to Green') {
             steps {
-                bat '''
-                powershell -Command "(Get-Content nginx/nginx.conf) -replace 'server host.docker.internal:8082;', 'server host.docker.internal:8083;' | Set-Content nginx/nginx.conf"
-                docker exec blue-green-proxy nginx -s reload
-                '''
+                    bat '''
+                    powershell -Command "(Get-Content nginx/nginx.conf) -replace 'server host.docker.internal:8082;', 'server host.docker.internal:8083;' | Set-Content nginx/nginx.conf"
+
+                    docker exec blue-green-proxy nginx -s reload
+
+                    docker exec blue-green-proxy cat /etc/nginx/nginx.conf
+
+                    curl --fail http://localhost:8080/health
+                    '''
             }
         }
+        
     }
 
     post {
