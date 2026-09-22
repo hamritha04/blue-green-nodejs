@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
                 <h1>Blue-Green Deployment Demo</h1>
                 <h2>Application Version: ${VERSION}</h2>
                 <p>Running on port: ${PORT}</p>
-                <p> CI/CD works! </p>
+                <p> CI/CD works now!</p>
             </body>
         </html>
     `);
