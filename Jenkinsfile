@@ -59,7 +59,7 @@ pipeline {
         stage('Health Check Green') {
             steps {
                 bat '''
-                timeout /t 5 /nobreak
+                powershell -Command "Start-Sleep -Seconds 5"
                 curl --fail http://localhost:8083/health
                 '''
             }
